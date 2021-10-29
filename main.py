@@ -16,7 +16,7 @@ def get_news(emoji):
     # Creates the message to be sent via SMS
     global message_to_send
     news_response = requests.get("https://newsapi.org/v2/everything?"
-                                 f"q={COMPANY_NAME}&"
+                                 f"qInTitle={COMPANY_NAME}&"
                                  f"from={str(yesterday)}&"
                                  "sortBy=publishedAt&"
                                  "language=en&"
@@ -39,8 +39,8 @@ day_before_yesterday = datetime.datetime.now().date() - datetime.timedelta(2)
 yesterday_stock = float(alpha_response.json()['Time Series (Daily)'][str(yesterday)]['1. open'])
 day_before_yesterday_stock = float(alpha_response.json()['Time Series (Daily)'][str(day_before_yesterday)]['1. open'])
 stock_percentage = (yesterday_stock / day_before_yesterday_stock) * 100
-if stock_percentage >= 101 or stock_percentage <= 95:
-    if stock_percentage >= 101:
+if stock_percentage >= 105 or stock_percentage <= 95:
+    if stock_percentage >= 105:
         get_news("🔺")
         send_message = True
     elif stock_percentage <= 95:
